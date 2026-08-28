@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "yg3": {
+      "url": "https://mcp.yg3.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_WORKSPACE_TOKEN"
+      }
+    }
+  }
+}
