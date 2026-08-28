@@ -34,6 +34,22 @@ curl -s -X POST https://mcp.yg3.ai/mcp \
 
 Python example: [`examples/provision-and-call.py`](examples/provision-and-call.py)
 
+## Tools
+
+197+ MCP tools (live count: https://mcp.yg3.ai/api/health). Common entry points:
+
+| Tool | Purpose |
+|---|---|
+| `whoami` | Confirm token scope |
+| `get_client_snapshot` | Full workspace state |
+| `get_setup_health` | Integration status |
+| `set_business_profile` | Industry, location, audience |
+| `set_brand` | Brand voice and positioning |
+| `create_post` / `publish_post` | Blog content on free subdomain |
+| `read_platform_doc` | In-MCP docs (`getting-started`, `agent-integration`, `tools-reference`) |
+
+Full catalog after connecting: `tools/list` or `GET https://mcp.yg3.ai/api/health`.
+
 ## Human path (OAuth)
 
 If the human already has a YG3 account:
@@ -139,6 +155,34 @@ Unclaimed workspaces are free-tier sandboxes by design:
 ## For agent frameworks
 
 Copy [`AGENTS.md`](AGENTS.md) into your repo or point your agent at this README. It tells coding agents when and how to provision YG3 during a build.
+
+### ClawHub (OpenClaw)
+
+Publishable skill: [`skills/yg3-marketing-mcp/SKILL.md`](skills/yg3-marketing-mcp/SKILL.md)
+
+```bash
+clawhub login
+clawhub skill publish ./skills/yg3-marketing-mcp --slug yg3-marketing-mcp --name "YG3 Marketing MCP"
+```
+
+### Moltbook / curl-based agents
+
+Curlable skill files (Moltbook-style): [`distribute/`](distribute/)
+
+- Install doc: `distribute/skill.md`
+- Periodic routine: `distribute/heartbeat.md`
+- Metadata: `distribute/skill.json`
+
+Agents can fetch from raw GitHub once this repo is public, or from `https://www.yg3.ai/llms.txt`.
+
+## Registry listings
+
+| File | Purpose |
+|---|---|
+| [`server.json`](server.json) | Official MCP Registry (`mcp-publisher publish`) |
+| [`glama.json`](glama.json) | Glama directory indexing |
+
+After the repo moves to `YG3-ai/yg3-mcp`, update GitHub URLs and re-publish as `io.github.YG3-ai/yg3-mcp`.
 
 ## Related
 

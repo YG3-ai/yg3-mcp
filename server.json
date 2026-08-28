@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.slamdunkboy17/yg3-mcp",
+  "title": "YG3 Marketing MCP",
+  "description": "Marketing MCP: content, SEO, outbound, LinkedIn, ads. Agents provision a sandbox with one POST.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.yg3.ai/for-agents",
+  "repository": {
+    "url": "https://github.com/slamdunkboy17/yg3-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.yg3.ai/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Agent path: Bearer token from POST https://agency.yg3.ai/api/v1/workspaces. Human path: OAuth session from https://www.yg3.ai/connect.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
