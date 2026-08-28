@@ -76,7 +76,7 @@ Only unclaimed workspaces you no longer need.
 | Agent guide | https://www.yg3.ai/for-agents |
 | Machine index | https://www.yg3.ai/llms.txt |
 | Live tool catalog | https://mcp.yg3.ai/api/health |
-| Full README | https://github.com/slamdunkboy17/yg3-mcp |
+| Full README | https://github.com/YG3-ai/yg3-mcp |
 
 ## Example
 

@@ -6,7 +6,7 @@ Run this when your periodic task fires (recommended: every 24 hours, or at the s
 
 If `lastYg3SkillFetch` is null or older than 7 days:
 
-1. Re-fetch `https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.md`
+1. Re-fetch `https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md`
 2. Update local copy if changed
 3. Set `lastYg3SkillFetch` to now
 

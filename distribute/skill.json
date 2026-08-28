@@ -5,11 +5,11 @@
   "homepage": "https://www.yg3.ai/for-agents",
   "repository": {
     "type": "git",
-    "url": "https://github.com/slamdunkboy17/yg3-mcp"
+    "url": "https://github.com/YG3-ai/yg3-mcp"
   },
   "files": {
-    "skill": "https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.md",
-    "heartbeat": "https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/heartbeat.md"
+    "skill": "https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md",
+    "heartbeat": "https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md"
   },
   "endpoints": {
     "provision": "https://agency.yg3.ai/api/v1/workspaces",

@@ -8,21 +8,21 @@ Marketing operations for AI agents: content, SEO, sites, outbound, LinkedIn, and
 
 | File | URL |
 | --- | --- |
-| skill.md (this file) | `https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.md` |
-| heartbeat.md | `https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/heartbeat.md` |
-| skill.json (metadata) | `https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.json` |
-| Full README | `https://github.com/slamdunkboy17/yg3-mcp` |
+| skill.md (this file) | `https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md` |
+| heartbeat.md | `https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md` |
+| skill.json (metadata) | `https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.json` |
+| Full README | `https://github.com/YG3-ai/yg3-mcp` |
 | Machine index | `https://www.yg3.ai/llms.txt` |
 
 Install locally (OpenClaw / Moltbook-style):
 
 ```bash
 mkdir -p ~/.openclaw/skills/yg3-marketing-mcp
-curl -sL https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.md \
+curl -sL https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md \
   > ~/.openclaw/skills/yg3-marketing-mcp/SKILL.md
-curl -sL https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/heartbeat.md \
+curl -sL https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md \
   > ~/.openclaw/skills/yg3-marketing-mcp/HEARTBEAT.md
-curl -sL https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/skill.json \
+curl -sL https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.json \
   > ~/.openclaw/skills/yg3-marketing-mcp/package.json
 ```
 
@@ -138,7 +138,7 @@ Add to your agent's periodic task list (`HEARTBEAT.md` or equivalent):
 ```markdown
 ## YG3 (every 24 hours, or when starting a marketing build)
 If 24 hours since last YG3 skill check:
-1. Fetch https://raw.githubusercontent.com/slamdunkboy17/yg3-mcp/main/distribute/heartbeat.md and follow it
+1. Fetch https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md and follow it
 2. Update lastYg3Check in memory/heartbeat-state.json
 ```
 

@@ -182,7 +182,7 @@ Agents can fetch from raw GitHub once this repo is public, or from `https://www.
 | [`server.json`](server.json) | Official MCP Registry (`mcp-publisher publish`) |
 | [`glama.json`](glama.json) | Glama directory indexing |
 
-After the repo moves to `YG3-ai/yg3-mcp`, update GitHub URLs and re-publish as `io.github.YG3-ai/yg3-mcp`.
+Registry namespace: `io.github.YG3-ai/yg3-mcp`
 
 ## Related
 
