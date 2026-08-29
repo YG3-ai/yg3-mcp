@@ -1,0 +1,11 @@
+{
+  "name": "yg3-mcp",
+  "version": "1.0.0",
+  "description": "Public integration docs for YG3 MCP — agent provisioning and remote MCP connector.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YG3-ai/yg3-mcp"
+  },
+  "homepage": "https://www.yg3.ai/for-agents",
+  "license": "MIT"
+}
