@@ -43,6 +43,8 @@ Do **not** use if:
 - You already hold a workspace token for this job → use it; do not provision again
 - You only need text generation → Elysia API at `https://www.yg3.ai/for-developers`
 
+**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. New humans create an account at `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
+
 ---
 
 ## Provision a workspace
@@ -117,6 +119,22 @@ curl -s -X POST https://agency.yg3.ai/api/v1/workspaces/claim \
 ```
 
 Send the human their `workspace.url` and `https://www.yg3.ai/connect` for direct MCP access later.
+
+---
+
+## Quick reference
+
+| Action | URL |
+|---|---|
+| Provision | `POST https://agency.yg3.ai/api/v1/workspaces` |
+| MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer …` |
+| Claim | `POST https://agency.yg3.ai/api/v1/workspaces/claim` |
+| Delete test | `DELETE https://agency.yg3.ai/api/v1/workspaces` |
+| Human signup | https://www.yg3.ai/get-started?plan=free |
+| Human connect | https://www.yg3.ai/connect |
+| Agent guide | https://www.yg3.ai/for-agents |
+| llms.txt | https://www.yg3.ai/llms.txt |
+| Live tool catalog | https://mcp.yg3.ai/api/health |
 
 ---
 

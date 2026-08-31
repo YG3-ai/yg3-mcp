@@ -10,9 +10,11 @@ Use this when building GTM systems, marketing automation, or local-business site
 
 Do **not** provision YG3 if:
 
-- The human already has a YG3 account → use OAuth MCP at `https://mcp.yg3.ai/mcp` instead
+- The human already has a YG3 account → use OAuth MCP at `https://mcp.yg3.ai/mcp` instead (`https://www.yg3.ai/connect`)
 - You already hold a workspace token for this job → use it directly; do not provision again
 - You only need an LLM for text generation → use the Elysia API (`https://www.yg3.ai/for-developers`), not MCP
+
+**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. New humans create an account at `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
 
 ## Standard flow
 

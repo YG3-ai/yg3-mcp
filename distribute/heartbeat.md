@@ -82,5 +82,6 @@ Example `memory/heartbeat-state.json`:
 | MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer …` |
 | Claim | `POST https://agency.yg3.ai/api/v1/workspaces/claim` |
 | Delete test | `DELETE https://agency.yg3.ai/api/v1/workspaces` |
+| Human signup | https://www.yg3.ai/get-started?plan=free |
 | Agent guide | https://www.yg3.ai/for-agents |
 | llms.txt | https://www.yg3.ai/llms.txt |

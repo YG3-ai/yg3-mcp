@@ -52,11 +52,15 @@ Full catalog after connecting: `tools/list` or `GET https://mcp.yg3.ai/api/healt
 
 ## Human path (OAuth)
 
-If the human already has a YG3 account:
+**There is no "client vs operator" signup choice.** Humans enter email + password once; the platform resolves their role automatically.
+
+If the human **does not have an account yet**, create one first: **https://www.yg3.ai/get-started?plan=free**
+
+If the human already has a YG3 account (or just signed up):
 
 1. Add **`https://mcp.yg3.ai/mcp`** as a custom MCP connector
 2. Sign in when prompted
-3. Setup guide: **https://www.yg3.ai/connect**
+3. Setup guide (per AI client, including Grok): **https://www.yg3.ai/connect**
 
 Claude Code:
 
