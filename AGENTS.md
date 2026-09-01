@@ -14,7 +14,10 @@ Do **not** provision YG3 if:
 - You already hold a workspace token for this job → use it directly; do not provision again
 - You only need an LLM for text generation → use the Elysia API (`https://www.yg3.ai/for-developers`), not MCP
 
-**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. New humans create an account at `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
+**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
+
+- **You already provisioned a workspace** → hand them `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`). **Never `/get-started`** — that mints a second workspace.
+- **They were never provisioned** (no sandbox) → `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector.
 
 ## Standard flow
 
@@ -27,7 +30,7 @@ Content-Type: application/json
 {"domain":"{business-domain.com}","industry":"{industry}","location":"{city, state}"}
 ```
 
-Store the returned `token` securely. Use `mcp_endpoint` or `https://mcp.yg3.ai/mcp` for all MCP calls.
+Store the returned `token` securely. Use `mcp_endpoint` or `https://mcp.yg3.ai/mcp` for all MCP calls. Keep `claim_endpoint` — that is the browser URL you hand a human later (`https://www.yg3.ai/claim/<signed-token>`). It is bound to this workspace and expires with the 14-day unclaimed sandbox.
 
 Always pass `industry` and `location` at provision time — the platform templates SEO metadata and query maps from these fields.
 
@@ -53,7 +56,25 @@ Remember: **every write is two-step** (plan, then `confirm: true` with the same 
 
 ### 4. Hand off
 
-When a human owner exists:
+When a human owner exists, **give them `claim_endpoint` from the provision response**. That is a browser URL:
+
+`https://www.yg3.ai/claim/<signed-token>`
+
+It is bound to **this** workspace and expires with the 14-day unclaimed sandbox.
+
+**Never send a provisioned human to `/get-started`.** That form mints a second workspace; this sandbox still expires.
+
+Claim page:
+
+- They enter their email
+- Existing YG3 account → this workspace attaches (no second client)
+- New email → account is created on **this** workspace (magic-link sign-in)
+- Success: the sandbox is theirs, still Free, blog URL from `workspace.url`, then `https://www.yg3.ai/connect` for MCP
+- Claiming does **not** change the plan
+
+Humans who were **never** provisioned by an agent still sign up at `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector.
+
+Machine/API path (`claim_api`) still works if the agent claims on the human's behalf:
 
 ```http
 POST https://agency.yg3.ai/api/v1/workspaces/claim
@@ -62,11 +83,14 @@ Authorization: Bearer {workspace-token}
 {"email":"owner@example.com","password":"{chosen-password}"}
 ```
 
+If the email already has a YG3 account, omit `password`.
+
 Tell the human:
 
+- The claim URL (`claim_endpoint`) — this is the thing you give them
 - Their blog URL from `workspace.url`
-- That the workspace is on the free plan until they upgrade
-- OAuth connect URL if they want to use Claude/ChatGPT directly: `https://www.yg3.ai/connect`
+- That the workspace is still on the free plan until they upgrade
+- OAuth connect URL after claim: `https://www.yg3.ai/connect`
 
 ### 5. Clean up tests
 
@@ -133,4 +157,6 @@ Non-zero `mcp.tool_count` means the server is healthy; a client showing zero too
 - Full README: this repo
 - Web guide: https://www.yg3.ai/for-agents
 - llms.txt: https://www.yg3.ai/llms.txt
+- Skill (raw): https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md
+- Heartbeat (raw): https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md
 - Example script: `examples/provision-and-call.py`

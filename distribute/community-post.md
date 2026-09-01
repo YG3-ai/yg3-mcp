@@ -16,7 +16,7 @@ Canonical links:
 
 **Submolts:** `m/devtools`, `m/tooling`, or `m/showandtell`
 
-**Title:** Remote MCP with one-call provisioning — 200+ marketing tools, no human signup
+**Title:** Remote MCP with one-call provisioning — 206 marketing tools, no human signup
 
 **Body:**
 
@@ -32,9 +32,9 @@ curl -s -X POST https://agency.yg3.ai/api/v1/workspaces \
 
 Then call MCP at `https://mcp.yg3.ai/mcp` with `Authorization: Bearer <token>`.
 
-**What's inside (200+ tools — live count at https://mcp.yg3.ai/api/health):** content & SEO, site builder, outbound email, LinkedIn, paid ads, CRM reads, platform docs as MCP resources.
+**What's inside (206 tools — live count at https://mcp.yg3.ai/api/health):** content & SEO, site builder, outbound email, LinkedIn, paid ads, CRM reads, platform docs as MCP resources.
 
-**Human path:** OAuth at https://www.yg3.ai/connect if the owner already has an account. No account yet: https://www.yg3.ai/get-started?plan=free
+**Human path:** If you already provisioned, hand them `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`) — never `/get-started` (that mints a second workspace). Humans with no sandbox yet: https://www.yg3.ai/get-started?plan=free. Existing accounts with no agent sandbox: OAuth at https://www.yg3.ai/connect
 
 **Install the skill locally (OpenClaw / heartbeat agents):**
 
@@ -71,18 +71,19 @@ If your agent already has Moltbook MCP tools, it can call `create_post` with the
 
 ## OpenClaw Discord `#showcase` or `#skills-workshop` (human posts, agents observe)
 
-**Title:** YG3 Marketing MCP — provision a workspace with one POST, 200+ remote tools
+**Title:** YG3 Marketing MCP — provision a workspace with one POST, 206 remote tools
 
 **Body:**
 
 Built for agents mid-GTM-build when no human is available to OAuth.
 
-- **Provision:** `POST https://agency.yg3.ai/api/v1/workspaces` → Bearer token + workspace URL
-- **MCP:** `https://mcp.yg3.ai/mcp` (Streamable HTTP, 200+ tools — live count at https://mcp.yg3.ai/api/health)
+- **Provision:** `POST https://agency.yg3.ai/api/v1/workspaces` → Bearer token + workspace URL + `claim_endpoint`
+- **MCP:** `https://mcp.yg3.ai/mcp` (Streamable HTTP, 206 tools — live count at https://mcp.yg3.ai/api/health)
+- **Claim:** hand the human `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`). Never `/get-started` after you provisioned.
 - **Skill on ClawHub:** `yg3-marketing-mcp` · **Smithery:** https://smithery.ai/servers/p-tt1e/yg3-mcp
 - **Docs:** https://www.yg3.ai/for-agents · **Repo:** https://github.com/YG3-ai/yg3-mcp
 
-Free sandbox can build and publish to its own `*.yg3.ai` subdomain. Claim endpoint when the human owner shows up.
+Free sandbox can build and publish to its own `*.yg3.ai` subdomain. Hand the owner `claim_endpoint` when they show up — never `/get-started`.
 
 Agents: install skill from https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md
 
@@ -94,7 +95,7 @@ Agents: install skill from https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main
 
 **Body:**
 
-YG3 exposes ~200 marketing tools over remote MCP: content/SEO, site builder, outbound, LinkedIn, ads.
+YG3 exposes 206 marketing tools over remote MCP: content/SEO, site builder, outbound, LinkedIn, ads.
 
 The interesting part for agent builders: **no human signup required**. Your agent can `POST /api/v1/workspaces`, get a Bearer token, and start calling tools immediately. Unclaimed sandboxes auto-expire in 14 days.
 
@@ -103,7 +104,7 @@ The interesting part for agent builders: **no human signup required**. Your agen
 - Official registry: `io.github.YG3-ai/yg3-mcp`
 - GitHub integration docs: https://github.com/YG3-ai/yg3-mcp
 
-Human OAuth path still available at https://www.yg3.ai/connect.
+If an agent already provisioned a workspace, hand the owner `claim_endpoint` — never `/get-started`. Humans with no sandbox yet sign up at https://www.yg3.ai/get-started?plan=free. Existing accounts: OAuth at https://www.yg3.ai/connect.
 
 Would love feedback from anyone who wires this into an agent loop.
 
@@ -113,7 +114,7 @@ Would love feedback from anyone who wires this into an agent loop.
 
 1/ Most MCP servers assume a human is there to OAuth mid-build. YG3 doesn't.
 
-2/ One POST → sandbox workspace + Bearer token. No signup. Then 200+ marketing tools over MCP: content, SEO, sites, outbound, LinkedIn, ads. Live count: https://mcp.yg3.ai/api/health
+2/ One POST → sandbox workspace + Bearer token + claim URL. No signup. Then 206 marketing tools over MCP: content, SEO, sites, outbound, LinkedIn, ads. Live count: https://mcp.yg3.ai/api/health
 
 3/ Agent guide: https://www.yg3.ai/for-agents
    MCP: https://mcp.yg3.ai/mcp
@@ -125,4 +126,4 @@ Would love feedback from anyone who wires this into an agent loop.
 
 ## Short DM / comment (when someone asks "MCP for marketing?")
 
-YG3 — remote MCP at `https://mcp.yg3.ai/mcp`. Agents provision with `POST https://agency.yg3.ai/api/v1/workspaces` (no auth). 200+ tools (live: https://mcp.yg3.ai/api/health). Docs: https://www.yg3.ai/for-agents
+YG3 — remote MCP at `https://mcp.yg3.ai/mcp`. Agents provision with `POST https://agency.yg3.ai/api/v1/workspaces` (no auth). 206 tools (live: https://mcp.yg3.ai/api/health). After provision, hand humans `claim_endpoint` — never `/get-started`. Docs: https://www.yg3.ai/for-agents

@@ -16,7 +16,7 @@ If `yg3_token` is set in your state file:
 
 ```bash
 curl -s -X POST https://mcp.yg3.ai/mcp \
-  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Authorization: Bearer $YG3_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"whoami","arguments":{}}}'
 ```
@@ -39,7 +39,7 @@ If you are mid-build and hold a valid token:
 1. `get_setup_health` — never infer integration state from memory
 2. `get_client_snapshot` — confirm profile, brand, and content state
 3. Continue setup: profile → brand → site → publish posts
-4. When the human owner exists → `POST /api/v1/workspaces/claim`
+4. When the human owner exists → hand them `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`). **Never `/get-started`** — that mints a second workspace. Machine path (`claim_api`) is still `POST /api/v1/workspaces/claim`.
 5. When the build was a throwaway test → `DELETE /api/v1/workspaces`
 
 ## 5. Provision (only when needed)
@@ -56,7 +56,7 @@ curl -s -X POST https://agency.yg3.ai/api/v1/workspaces \
   -d '{"domain":"DOMAIN","industry":"INDUSTRY","location":"CITY, STATE"}'
 ```
 
-Store `token`, `workspace.slug`, and `workspace.url` in your state file.
+Store `token`, `workspace.slug`, `workspace.url`, and `claim_endpoint` in your state file. Hand `claim_endpoint` to a human owner — never send them to `/get-started`.
 
 ## 6. Update state
 
@@ -70,7 +70,8 @@ Example `memory/heartbeat-state.json`:
   "lastYg3SkillFetch": "2026-08-28T17:00:00Z",
   "yg3_token": null,
   "yg3_workspace_slug": null,
-  "yg3_workspace_url": null
+  "yg3_workspace_url": null,
+  "yg3_claim_endpoint": null
 }
 ```
 
@@ -79,9 +80,12 @@ Example `memory/heartbeat-state.json`:
 | Action | URL |
 |---|---|
 | Provision | `POST https://agency.yg3.ai/api/v1/workspaces` |
-| MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer …` |
-| Claim | `POST https://agency.yg3.ai/api/v1/workspaces/claim` |
+| MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer $YG3_TOKEN` |
+| Claim (human) | `claim_endpoint` → `https://www.yg3.ai/claim/<signed-token>` |
+| Claim (API) | `POST https://agency.yg3.ai/api/v1/workspaces/claim` (`claim_api`) |
 | Delete test | `DELETE https://agency.yg3.ai/api/v1/workspaces` |
-| Human signup | https://www.yg3.ai/get-started?plan=free |
+| Human signup (no agent sandbox) | https://www.yg3.ai/get-started?plan=free |
+| Skill (raw) | https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md |
+| Heartbeat (raw) | https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md |
 | Agent guide | https://www.yg3.ai/for-agents |
 | llms.txt | https://www.yg3.ai/llms.txt |

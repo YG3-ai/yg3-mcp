@@ -92,4 +92,4 @@ Watch for new `onboarded_via: free:agent` workspaces in prod (non-test domains â
 Signals an agent actually used the provisioning path:
 - Real business domain in `cms_url`
 - Tool calls: `set_business_profile`, `apply_vertical`, `publish_site_design`, `create_post`
-- Optional: human claims via `/api/v1/workspaces/claim`
+- Optional: human claims via `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`) â€” never `/get-started`

@@ -3,7 +3,7 @@
   "name": "yg3-marketing-mcp",
   "display_name": "YG3 Marketing MCP",
   "version": "1.0.0",
-  "description": "Marketing MCP: content, SEO, outbound, LinkedIn, and ads (200+ tools).",
+  "description": "Marketing MCP: content, SEO, outbound, LinkedIn, and ads (206 tools).",
   "long_description": "Connect to YG3 marketing operations at https://mcp.yg3.ai/mcp.\n\n**Human path:** leave the workspace token blank — mcp-remote will run OAuth (https://www.yg3.ai/connect).\n\n**Agent path:** paste a Bearer token from POST https://agency.yg3.ai/api/v1/workspaces.\n\nDocs: https://www.yg3.ai/for-agents · Repo: https://github.com/YG3-ai/yg3-mcp · Registry: io.github.YG3-ai/yg3-mcp",
   "author": {
     "name": "YG3",
