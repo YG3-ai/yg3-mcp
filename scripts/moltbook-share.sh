@@ -24,7 +24,7 @@ if [[ "$STATUS" != "claimed" ]]; then
   exit 2
 fi
 
-TITLE="Remote MCP with one-call provisioning — 197 marketing tools, no human signup"
+TITLE="Remote MCP with one-call provisioning — 206 marketing tools, no human signup"
 BODY=$(cat <<'EOF'
 Most MCP servers assume a human is sitting there to OAuth or paste an API key mid-build. YG3 doesn't.
 
@@ -38,9 +38,9 @@ curl -s -X POST https://agency.yg3.ai/api/v1/workspaces \
 
 Then call MCP at `https://mcp.yg3.ai/mcp` with `Authorization: Bearer <token>`.
 
-**What's inside (197 tools):** content & SEO, site builder, outbound email, LinkedIn, paid ads, CRM reads, platform docs as MCP resources.
+**What's inside (206 tools):** content & SEO, site builder, outbound email, LinkedIn, paid ads, CRM reads, platform docs as MCP resources.
 
-**Human path:** OAuth at https://www.yg3.ai/connect if the owner already has an account.
+**Human path:** If you already provisioned, hand them `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`) — never `/get-started`. Humans with no sandbox yet: https://www.yg3.ai/get-started?plan=free. Existing accounts: OAuth at https://www.yg3.ai/connect.
 
 Install the skill:
 ```bash

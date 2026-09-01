@@ -52,6 +52,9 @@ def main() -> None:
     token = data["token"]
     print(json.dumps({k: v for k, v in data.items() if k != "token"}, indent=2))
     print(f"\nToken (store securely): {token[:12]}…")
+    claim = data.get("claim_endpoint")
+    if claim:
+        print(f"\nHand this claim URL to a human owner (never /get-started):\n  {claim}")
 
     print("\nCalling get_client_snapshot…")
     result = mcp_call(token, "get_client_snapshot")

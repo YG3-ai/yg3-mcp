@@ -43,7 +43,10 @@ Do **not** use if:
 - You already hold a workspace token for this job → use it; do not provision again
 - You only need text generation → Elysia API at `https://www.yg3.ai/for-developers`
 
-**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. New humans create an account at `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
+**Never ask the user to choose a "client" or "operator" account.** There is no such signup fork. Login resolves whether they are an agency admin or a workspace owner. `client_user` in API docs means a workspace-scoped token — not a signup type.
+
+- **You already provisioned a workspace** → hand them `claim_endpoint` (`https://www.yg3.ai/claim/<signed-token>`). **Never `/get-started`** — that mints a second workspace.
+- **They were never provisioned** (no sandbox) → `https://www.yg3.ai/get-started?plan=free`, then add the MCP connector.
 
 ---
 
@@ -68,7 +71,8 @@ Optional: `"name"` if you have no domain yet.
 | `token` | Bearer token for MCP (store securely) |
 | `mcp_endpoint` | JSON-RPC URL (`https://mcp.yg3.ai/mcp`) |
 | `workspace` | id, slug, name, url |
-| `claim_endpoint` | Where the owner attaches later |
+| `claim_endpoint` | Browser URL `https://www.yg3.ai/claim/<signed-token>` bound to **this** workspace. Hand this to a human. Expires with the 14-day unclaimed sandbox. |
+| `claim_api` | Machine path: Bearer `POST /api/v1/workspaces/claim`. The thing you give a human is `claim_endpoint`. |
 | `expires_in_days` | 14 for unclaimed workspaces |
 
 Save credentials (example):
@@ -78,6 +82,7 @@ Save credentials (example):
   "yg3_token": "yg3_xxx",
   "workspace_slug": "acme-plumbing",
   "workspace_url": "https://blog-acme-plumbing.yg3.ai",
+  "claim_endpoint": "https://www.yg3.ai/claim/<signed-token>",
   "provisioned_at": "2026-08-28T00:00:00Z"
 }
 ```
@@ -92,7 +97,7 @@ All traffic is JSON-RPC 2.0 over HTTP:
 
 ```bash
 curl -s -X POST https://mcp.yg3.ai/mcp \
-  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Authorization: Bearer $YG3_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
@@ -111,14 +116,25 @@ curl -s https://mcp.yg3.ai/api/health
 
 ## Claim for a human
 
+**Give them `claim_endpoint`.** That is a page at `https://www.yg3.ai/claim/<signed-token>` for this workspace. They enter email there.
+
+- Existing YG3 account → this workspace attaches (no second client)
+- New email → account is created on **this** workspace (magic-link sign-in)
+- Success: the sandbox is theirs, still Free, blog URL from `workspace.url`, then `https://www.yg3.ai/connect` for MCP
+- Claiming does **not** change the plan
+
+**Never send them to `/get-started`.** That mints a second workspace; this sandbox still expires.
+
+Machine/API path (`claim_api`) if the agent claims on their behalf:
+
 ```bash
 curl -s -X POST https://agency.yg3.ai/api/v1/workspaces/claim \
-  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Authorization: Bearer $YG3_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"email":"owner@example.com","password":"their-password"}'
 ```
 
-Send the human their `workspace.url` and `https://www.yg3.ai/connect` for direct MCP access later.
+Omit `password` if the email already has a YG3 account.
 
 ---
 
@@ -127,13 +143,16 @@ Send the human their `workspace.url` and `https://www.yg3.ai/connect` for direct
 | Action | URL |
 |---|---|
 | Provision | `POST https://agency.yg3.ai/api/v1/workspaces` |
-| MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer …` |
-| Claim | `POST https://agency.yg3.ai/api/v1/workspaces/claim` |
+| MCP | `POST https://mcp.yg3.ai/mcp` + `Authorization: Bearer $YG3_TOKEN` |
+| Claim (human) | `claim_endpoint` → `https://www.yg3.ai/claim/<signed-token>` |
+| Claim (API) | `POST https://agency.yg3.ai/api/v1/workspaces/claim` (`claim_api`) |
 | Delete test | `DELETE https://agency.yg3.ai/api/v1/workspaces` |
-| Human signup | https://www.yg3.ai/get-started?plan=free |
+| Human signup (no agent sandbox) | https://www.yg3.ai/get-started?plan=free |
 | Human connect | https://www.yg3.ai/connect |
 | Agent guide | https://www.yg3.ai/for-agents |
 | llms.txt | https://www.yg3.ai/llms.txt |
+| Skill (raw) | https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/skill.md |
+| Heartbeat (raw) | https://raw.githubusercontent.com/YG3-ai/yg3-mcp/main/distribute/heartbeat.md |
 | Live tool catalog | https://mcp.yg3.ai/api/health |
 
 ---
@@ -142,7 +161,7 @@ Send the human their `workspace.url` and `https://www.yg3.ai/connect` for direct
 
 ```bash
 curl -s -X DELETE https://agency.yg3.ai/api/v1/workspaces \
-  -H "Authorization: Bearer YOUR_TOKEN"
+  -H "Authorization: Bearer $YG3_TOKEN"
 ```
 
 Only unclaimed workspaces you created for testing.
@@ -166,7 +185,8 @@ Track state:
 {
   "lastYg3Check": null,
   "yg3_token": null,
-  "yg3_workspace_slug": null
+  "yg3_workspace_slug": null,
+  "yg3_claim_endpoint": null
 }
 ```
 

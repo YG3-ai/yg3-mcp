@@ -1,7 +1,7 @@
 {
   "name": "yg3-marketing-mcp",
   "version": "1.0.0",
-  "description": "Provision a YG3 marketing workspace and call 200+ MCP tools — content, SEO, outbound, LinkedIn, ads. No human signup required.",
+  "description": "Provision a YG3 marketing workspace and call 206 MCP tools — content, SEO, outbound, LinkedIn, ads. No human signup required.",
   "homepage": "https://www.yg3.ai/for-agents",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
     "provision": "https://agency.yg3.ai/api/v1/workspaces",
     "mcp": "https://mcp.yg3.ai/mcp",
     "health": "https://mcp.yg3.ai/api/health",
+    "claim_api": "https://agency.yg3.ai/api/v1/workspaces/claim",
     "llms_txt": "https://www.yg3.ai/llms.txt"
   },
   "tags": ["marketing", "seo", "content", "mcp", "remote", "agent-provisioning"]
